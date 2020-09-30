@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="result">
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $.ajax( {
+            "crossDomain": true,
+            "url": "https://reqres.in/api/users?",
+            "method": "GET",
+        }).done( function (res) {
+            // alert(res.data[0])
+            data = res.data
+            var result = ""
+            for(i=0;i<data.length;i++) {
+                // alert(data[i].email)
+                result +=
+                 "<br>" + 
+                `<a href='detail.html?id=${data[i].id}'>id = ${data[i].id} </a>`  
+                + "<br>" + 
+                'first name =' + data[i].first_name 
+                + "<br>" +
+                'last name =' + data[i].last_name 
+                + "<br>" +
+                'email = ' + data[i].email
+                + "<br>" +
+                `image <br> <img src="${data[i].avatar}" >`
+                + "<br>"
+            }
+
+            $( "#result" ).html( result );
+            // alert( "Load was performed." );
+        });
+    </script>
+</body>
+</html>

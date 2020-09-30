@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- <div class="row"> -->
+            <div id="result">
+
+            </div>
+        <!-- </div> -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $.ajax( {
+            "crossDomain": true,
+            "url": "https://reqres.in/api/users?",
+            "method": "GET",
+        }).done( function (res) {
+            // alert(res.data[0])
+            data = res.data
+            var result = ""
+            for(i=0;i<data.length;i++) {
+                // alert(data[i].email)
+                result +=
+                 "<div class='card mt-3 mb-3'><div class='col-md-3'>" + 
+                `<a href='detail.html?id=${data[i].id}'>`  
+                + "<br>" + 
+                'first name =' + data[i].first_name 
+                + "<br>" +
+                'last name =' + data[i].last_name 
+                + "<br>" +
+                '</a>email = ' + data[i].email
+                + "<br>" +
+                `<div class='col-md-4'><img src="${data[i].avatar}" style="border-radius:50%"> <br></div>`
+                + "</div></div>"
+            }
+
+            $( "#result" ).append( result );
+            // alert( "Load was performed." );
+        });
+    </script>
+</body>
+</html>

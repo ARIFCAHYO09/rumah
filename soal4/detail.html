@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="result">
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+
+        var id = getUrlParameter('id')
+        $.ajax( {
+            "crossDomain": true,
+            "url": "https://reqres.in/api/users/" + id,
+            "method": "GET",
+        }).done( function (res) {
+            // alert(res.data[0])
+            console.log(res)
+            ad = res.ad
+            data = res.data
+            var result = ""
+            // for(i=0;i<data.length;i++) {
+                // alert(data.email)
+                result +=
+                 "<br>" + 
+                `<a href='detail/${data.id}'>id = ${data.id} </a>`  
+                + "<br>" + 
+                'first name =' + data.first_name 
+                + "<br>" +
+                'last name =' + data.last_name 
+                + "<br>" +
+                'email = ' + data.email
+                + "<br>" +
+                'company = ' + ad.company
+                + "<br>" +
+                'url = ' + ad.url
+                + "<br>" +
+                'motto = ' + ad.text
+                + "<br>" +
+                `image <br> <img src="${data.avatar}" >`
+                + "<br>"
+            // }
+
+            $( "#result" ).html( result );
+            // alert( "Load was performed." );
+        });
+    </script>
+</body>
+</html>
